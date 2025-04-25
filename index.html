@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DISCERCOL G&M</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #fff;
+      color: #1e1e1e;
+      padding-top: 80px; /* Añadido para dejar espacio al encabezado fijo */
+    }
+
+    /* Header y Navbar */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      padding: 10px 20px;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      flex-wrap: wrap; /* Esto ayudará a que los elementos no se corten */
+    }
+
+    .navbar ul {
+      list-style-type: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+      margin-left: 50px; /* Aumentado para separar más las categorías */
+    }
+
+    .navbar li {
+      font-size: 1.2em;
+    }
+
+    /* Redes sociales */
+    .redes-sociales {
+      display: flex;
+      justify-content: center; /* Centra las imágenes en fila */
+      gap: 30px; /* Espaciado entre las imágenes */
+      margin-top: 10px; /* Asegura que no haya demasiado espacio */
+      align-items: center; /* Centra las imágenes verticalmente */
+    }
+
+    .redes-sociales a {
+      color: white;
+      font-size: 1.5em;
+    }
+
+    .redes-sociales img {
+      width: 35px;
+      height: 35px;
+      transition: transform 0.3s ease;
+    }
+
+    .redes-sociales a:hover img {
+      transform: scale(1.1); /* Efecto hover para las redes sociales */
+    }
+
+    .company-logo {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .company-logo:hover {
+      transform: scale(1.05);
+    }
+
+    .company-logo img {
+      width: 35px;
+      height: auto;
+      margin-left: 10px;
+    }
+
+    .company-logo span {
+      font-size: 1.5em;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .navbar ul {
+      list-style-type: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar li {
+      font-size: 1.2em;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #1e1e1e;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .navbar a:hover {
+      color: #007bff;
+    }
+
+    .hero {
+      padding: 140px 20px 80px;
+      background-color: #fff;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: auto;
+      gap: 40px;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-text h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    .hero-text p {
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
+    .btn {
+      background-color: #000;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #333;
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .slider-wrapper {
+      display: flex;
+      transition: transform 1s ease-in-out;
+    }
+
+    .slider-wrapper img {
+      width: 100%;
+      height: auto;
+      border-radius: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .separator {
+      height: 1px;
+      background-color: #ddd;
+      margin: 40px 0;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 40px auto;
+    }
+
+    .quienes-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .quienes-img {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .quienes-img img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .quienes-text {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .quienes-text h2 {
+      font-size: 2.2em;
+      margin-bottom: 20px;
+      color: #000;
+    }
+
+    .quienes-text p {
+      font-size: 1.1em;
+      color: #444;
+    }
+
+    footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 15px 20px;
+    }
+
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50%;
+      padding: 15px;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 9999;
+      transition: background-color 0.3s ease;
+    }
+
+    .whatsapp-btn img {
+      width: 40px;
+      height: auto;
+    }
+
+    .whatsapp-btn:hover {
+      background-color: #128C7E;
+    }
+
+    /* Estilo de scroll suave */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="company-logo" onclick="scrollToTop()">
+      <span>DISCERCOL G&M</span>
+      <img src="https://st4.depositphotos.com/11720069/38655/v/450/depositphotos_386559040-stock-illustration-video-surveillance-camera-icon-line.jpg" alt="Cámara">
+    </div>
+    <nav class="navbar">
+      <ul>
+        <li><a href="#quienes">Quiénes somos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#redes">Redes sociales</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Soluciones en Seguridad y Purificación</h1>
+        <p>Brindamos sistemas de cámaras y filtros de agua de alta calidad para hogares y empresas.</p>
+        <a href="productos.html" class="btn">Ver productos</a>
+      </div>
+      <div class="hero-image">
+        <div class="slider-wrapper" id="slider">
+          <img src="fotos/foto1.jpg" alt="Imagen 1">
+          <img src="fotos/foto2.jpg" alt="Imagen 2">
+          <img src="fotos/foto3.jpg" alt="Imagen 3">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="separator"></div>
+
+  <section id="quienes" class="card">
+    <div class="quienes-container">
+      <div class="quienes-img">
+        <img src="fotos/foto5.jpg" alt="Cámara de seguridad">
+      </div>
+      <div class="quienes-text">
+        <h2>Misión</h2>
+        <p>
+          Ofrecer una amplia gama de productos de seguridad para el hogar y el público en general, bien diseñados y funcionales, a precios accesibles que la mayor cantidad posible de personas pueda pagar. Que las personas que utilicen nuestros productos se sientan satisfechas no solo por el producto adquirido, sino también por la atención de nuestro personal y con la plena confianza de que nuestra garantía será la mejor. <strong>Nuestra misión es tu seguridad, la de tu negocio y la de tu familia.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <section class="card">
+    <div class="quienes-container">
+      <div class="quienes-text">
+        <h2>Visión</h2>
+        <p>
+          Que nuestro buen servicio y calidad nos ayuden a posicionarnos en el mercado por nuestra variedad de productos, cumplimiento y buena atención. Que seamos reconocidos solo con mencionar el nombre <strong>DISCERCOL G&M</strong>, como una empresa que brinda protección en el hogar y cualquier tipo de negocios.
+        </p>
+      </div>
+      <div class="quienes-img">
+        <img src="fotos/foto6.jpg" alt="Producto o servicio nuevo">
+      </div>
+    </div>
+  </section>
+  
+  <section class="card">
+    <div class="quienes-container">
+      <div class="quienes-img">
+        <img src="fotos/foto7.jpg" alt="Valores institucionales">
+      </div>
+      <div class="quienes-text">
+        <h2>Valores</h2>
+        <p>
+          somos una empresa transparente, la cual le habla a sus clientes con claridad respecto a los productos que nuestra empresa ofrece, somos honestos, atentos, puntuales y trabajamos en equipo.
+        </p>
+      </div>
+    </div>
+  </section>
+  
+
+  <footer id="contacto">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: auto; align-items: flex-start;">
+      <div style="flex: 1; min-width: 250px; text-align: left;">
+        <h4 style="font-size: 1.8em; font-weight: bold;">DISCERCOL G&M</h4>
+        <img src="fotos/logo.png" alt="Logo" style="width: 120px; height: auto; margin-top: 10px;">
+      </div>
+
+      <div style="flex: 1; min-width: 250px; text-align: center;">
+        <h4 style="font-size: 1.5em; font-weight: bold;">Contacto</h4>
+        <p>📧 <a href="mailto:discercolcaribegm@gmail.com" style="color: #fff; text-decoration: none;">discercolcaribegm@gmail.com</a></p>
+        <p>📞 <a href="tel:+573024458533" style="color: #fff; text-decoration: none;">+57 302 445 8533</a></p>
+        <p>📍 Soledad, Colombia</p>
+      </div>
+
+      <div style="flex: 1; min-width: 250px; text-align: right;" id="redes">
+        <h4 style="font-size: 1.5em; font-weight: bold; text-align: center;">Síguenos</h4>
+        <div class="redes-sociales">
+          <a href="https://www.instagram.com/discercolgm" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+          </a>
+         
+          <a href="https://www.tiktok.com/@discercolgm" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" style="width: 35px; height: 35px;">
+          </a>
+        </div>
+      </div>
+    </div>
+    <p>&copy; 2025 DISCERCOL G&M</p>
+  </footer>
+  
+  <div class="whatsapp-btn">
+    <a href="https://wa.me/573024458533" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Whatsapp">
+    </a>
+  </div>
+  <script>
+    // Función para volver arriba
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  
+    // Animación con ScrollReveal
+    ScrollReveal().reveal('.card', {
+      origin: 'bottom',
+      distance: '50px',
+      duration: 1000,
+      easing: 'ease-in-out',
+      interval: 200
+    });
+  </script>
+  <script>
+    const slider = document.getElementById("slider");
+    let index = 0;
+  
+    function slideHero() {
+      index = (index + 1) % slider.children.length;
+      slider.style.transform = `translateX(-${index * 100}%)`;
+    }
+  
+    setInterval(slideHero, 4000); // Cambia de imagen cada 4 segundos
+  </script>
+  
+</body>
+</html>

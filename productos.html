@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DISCERCOL G&M</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: thin;
+    }
+
+    body::-webkit-scrollbar {
+      width: 6px;
+      background: transparent;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+
+    .productos-scroll-wrapper {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 20px;
+      padding: 20px;
+      overflow: hidden;
+      scroll-behavior: smooth;
+    }
+
+    .productos-scroll-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    .productos-scroll-wrapper {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #111;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 24px;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 100;
+      transition: background-color 0.3s ease;
+    }
+
+    #prevBtn {
+      left: 0;
+    }
+
+    #nextBtn {
+      right: 0;
+    }
+
+    .arrow-btn:hover {
+      background-color: #333;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px 20px;
+      z-index: 1000;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      background: transparent;
+      transition: background-color 0.4s ease, transform 0.5s ease;
+    }
+
+    .header.scrolled {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transform: translateY(0);
+    }
+
+    .company-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #1e1e1e;
+      font-weight: bold;
+      font-size: 1.5em;
+      letter-spacing: 1px;
+    }
+
+    .company-logo img {
+      width: 35px;
+      height: auto;
+      margin-left: 10px;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .header.scrolled .company-logo img {
+      opacity: 1;
+    }
+
+    .hero {
+      background-image: url('https://www.segurilatam.com/wp-content/uploads/sites/5/2024/01/instalacion-camara-de-seguridad-wifi.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 80px 20px 60px;
+      height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3.5em;
+      font-weight: 700;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero p {
+      font-size: 1.5em;
+      margin-top: 20px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .catalogo {
+      padding: 80px 20px 50px;
+      background-color: #fff;
+      text-align: center;
+    }
+
+    .catalogo h2 {
+      font-size: 2.5em;
+      margin-bottom: 40px;
+      color: #333;
+      text-align: center;
+    }
+
+    .producto {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 2px solid #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #fff;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      text-align: center;
+      width: 280px;
+      flex-shrink: 0;
+    }
+
+    .producto:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .producto img {
+      width: 100%;
+      height: 250px;
+      object-fit: contain;
+    }
+
+    .producto-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Esto asegura que los elementos dentro de .producto-info estén distribuidos de manera uniforme */
+  flex-grow: 1; /* Hace que el contenedor crezca para llenar el espacio disponible */
+  padding: 20px;
+  background: #fafafa;
+  height: 100%; /* Asegura que todos los productos tengan la misma altura */
+}
+
+.producto-info h3 {
+  font-size: 1.3em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.producto-info p {
+  font-size: 0.95em;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.btn-ver-mas {
+  display: inline-block;
+  background-color: #1e1e1e;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  margin-top: auto; /* Esto empuja el botón al fondo del contenedor */
+}
+
+    .btn-ver-mas:hover {
+      background-color: #333;
+    }
+
+    footer {
+      background-color: #111;
+      color: white;
+      padding: 40px 20px;
+    }
+
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50%;
+      padding: 15px;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 9999;
+      transition: background-color 0.3s ease;
+    }
+
+    .whatsapp-btn img {
+      width: 40px;
+    }
+
+    .whatsapp-btn:hover {
+      background-color: #128C7E;
+    }
+
+    @media (max-width: 768px) {
+      .producto {
+        width: 90%;
+      }
+      .arrow-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header" id="mainHeader">
+  <a href="index.html" class="company-logo">
+
+    <span>DISCERCOL G&M</span>    <img src="fotos/logo.png" alt="Logo">
+  </a>
+  
+</header>
+
+<section class="hero">
+  <h1>CATÁLOGO</h1>
+  <p>Calidad, tecnología y seguridad al alcance de tu hogar</p>
+</section>
+
+<section class="catalogo">
+  <h2>Catálogo de Productos</h2>
+  <div style="position: relative;">
+    <button id="prevBtn" class="arrow-btn">❮</button>
+    <div class="productos-scroll-wrapper" id="carousel">
+      <div class="producto">
+        <img src="fotos/camara3.jpeg " alt="Cámara de Seguridad">
+        <div class="producto-info">
+          <h3>Cámara de Seguridad</h3>
+          <p>Cámaras de seguridad de alta definición, visión nocturna y monitoreo remoto.</p>
+          <a href="https://wa.me/573024458533?text=Quiero%20más%20información%20sobre%20la%20Cámara%20de%20Seguridad" class="btn-ver-mas">Ver más</a>
+        </div>
+      </div>
+      <div class="producto">
+        <img src="fotos/filtro.jpg" alt="Filtro de Agua">
+        <div class="producto-info">
+          <h3>Filtro de Agua</h3>
+          <p>Filtros de agua eficientes para purificar y garantizar agua de calidad en tu hogar.</p>
+          <a href="https://wa.me/573024458533?text=Quiero%20más%20información%20sobre%20el%20Filtro%20de%20Agua" class="btn-ver-mas">Ver más</a>
+        </div>
+      </div>
+      <div class="producto">
+        <img src="fotos/ae.jpeg " alt="Alarma Electrónica">
+        <div class="producto-info">
+          <h3>Alarma Electrónica</h3>
+          <p>Sistemas de alarma para proteger tu hogar contra intrusos y situaciones de emergencia.</p>
+          <a href="https://wa.me/573024458533?text=Quiero%20más%20información%20sobre%20la%20Alarma%20Electrónica" class="btn-ver-mas">Ver más</a>
+        </div>
+      </div>
+      <div class="producto">
+        <img src="fotos/cerradu.jpeg" alt="Cerradura">
+        <div class="producto-info">
+          <h3>Cerradura</h3>
+          <p>Cerradura robusta y resistente, ideal para puertas de acceso principal. Proporciona alta seguridad y es fácil de instalar. Protección confiable para tu hogar o negocio.</p>
+          <a href="https://wa.me/573024458533?text=Quiero%20más%20información%20sobre%20la%20Cerradura" class="btn-ver-mas">Ver más</a>
+        </div>
+      </div>
+      <div class="producto">
+        <img src="fotos/man.png" alt="Mantenimiento de Filtros">
+        <div class="producto-info">
+          <h3>Mantenimiento de Filtros, Cámaras y Cerraduras</h3>
+          <p>Servicio profesional para la limpieza y mantenimiento de filtros de agua, camaras de seguridad y cerraduras.</p>
+          <a href="https://wa.me/573024458533?text=Quiero%20más%20información%20sobre%20el%20Mantenimiento" class="btn-ver-mas">Ver más</a>
+        </div>
+      </div>
+
+    </div>
+    <button id="nextBtn" class="arrow-btn">❯</button>
+  </div>
+</section>
+
+
+<footer>
+  <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: auto; align-items: flex-start;">
+    <div style="flex: 1; min-width: 250px; text-align: left;">
+      <h4 style="font-size: 1.8em; font-weight: bold;">DISCERCOL G&M</h4>
+      <img src="fotos/logo.png" alt="Logo DISCERCOL G&M" style="width: 120px; height: auto; margin-top: 10px;">
+    </div>
+    <div style="flex: 1; min-width: 250px; text-align: center;">
+      <h4 style="font-size: 1.5em; font-weight: bold;">Contacto</h4>
+      <p>📧 <a href="mailto:discercolcaribegm@gmail.com" style="color: #fff; text-decoration: none;">discercolcaribegm@gmail.com</a></p>
+      <p>📞 <a href="tel:+573024458533" style="color: #fff; text-decoration: none;">+57 302 445 8533</a></p>
+      <p>📍 Barranquilla, Colombia</p>
+    </div>
+    <div style="flex: 1; min-width: 250px; text-align: right;">
+      <h4 style="font-size: 1.5em; font-weight: bold;">Síguenos</h4>
+      <div style="display: flex; justify-content: flex-end; gap: 15px;">
+        <a href="https://www.instagram.com/discercolgm" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width: 30px; height: 30px;">
+        </a>
+    
+        <a href="https://www.tiktok.com/discercolgm" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" style="width: 30px; height: 30px;">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div style="text-align: center; padding-top: 20px; font-size: 1em; border-top: 1px solid #444;">
+    <p>&copy; 2025 DISCERCOL G&M.</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/573024458533" class="whatsapp-btn" target="_blank" title="Contáctanos por WhatsApp">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+</a>
+
+<script>
+  const carousel = document.getElementById('carousel');
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    carousel.scrollBy({ left: 320, behavior: 'smooth' });
+  });
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    carousel.scrollBy({ left: -320, behavior: 'smooth' });
+  });
+
+  ScrollReveal().reveal('.producto-info', {
+    origin: 'left',
+    distance: '50px',
+    duration: 1000,
+    delay: 200,
+    easing: 'ease-in-out'
+  });
+
+  ScrollReveal().reveal('.producto', {
+    origin: 'right',
+    distance: '50px',
+    duration: 1000,
+    delay: 400,
+    easing: 'ease-in-out'
+  });
+
+  window.addEventListener('scroll', function() {
+    const header = document.getElementById('mainHeader');
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  });
+</script>
+
+</body>
+</html>
